@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Note</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: grid;
+            place-items: center; /* Center horizontally and vertically */
+        }
+         input[type="text"] {
+            height: 50px;
+        }
+
+        .main {
+            width: 55vw;
+            display: grid;
+            place-items: center; /* Center horizontally and vertically */
+            height: 79vh; /* Full viewport height */
+            background-color:white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .main input, textarea {
+            width: 50vw;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 20vh; /* Increased height */
+            resize: none;
+        }
+
+        .main button {
+            width:10vw;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto; /* Center horizontally */
+        }
+
+        .main button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+       lable{
+       font-weight:700;
+       }
+    </style>
+</head>
+<body>
+     <script>
+      function show()
+      {
+    	  
+    	  Swal.fire({
+    		    position: "middle",
+    		    icon: "success",
+    		    title: "Your work has been saved",
+    		    showConfirmButton: false,
+    		    timer:1900// Timer set to 10 seconds
+    		});
+
+      }
+     </script>
+    <div class="main">
+        <h1>Create New Note</h1>
+        <form th:action="@{/save}" th:object="${note}" method="post">
+            <label>ID:</label>
+            <input type="text" th:field="*{id}" required="required" placeholder="Enter Id"/>
+            
+            <label>Title:</label>
+            <input type="text" th:field="*{title}" required="required" placeholder="Enter title"/>
+            
+            <label>Content:</label>
+            <textarea th:field="*{content}" required="required"></textarea>
+            
+            <button onclick="show()" type="submit"><i class="fas fa-save"> </i> Save</button>
+        </form>
+        <a href="/"><i class="fas fa-arrow-left"></i> Back to Notes</a>
+    </div>
+</body>
+</html>
+
